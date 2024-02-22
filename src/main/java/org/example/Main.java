@@ -60,7 +60,7 @@ public class Main {
                     removeVehicle(vehicleToRemove);
                     break;
                 case 4:
-                    System.out.println("Number is 4. Exiting...");
+                    System.out.println("Number is 4. Exiting....");
                     running = false;
                     break;
 
