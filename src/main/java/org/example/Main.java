@@ -18,7 +18,13 @@ public class Main {
         while (running) {
 
 
-            System.out.print("Enter a number between 1 to 3: ");
+            System.out.print("Enter a number between 1 to 4: ");
+
+            System.out.println("1  Enter VehicleID");
+            System.out.println("2  Display Vehicle location");
+            System.out.println("3  Enter RemoveVehicle");
+            System.out.println("4  Exit");
+
             int choice;
             choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline character
@@ -49,7 +55,15 @@ public class Main {
                     break;
                 case 3:
                     System.out.println("Number is 3");
+                    System.out.print("Enter vehicle ID to remove: ");
+                    String vehicleToRemove = scanner.nextLine();
+                    removeVehicle(vehicleToRemove);
                     break;
+                case 4:
+                    System.out.println("Number is 4. Exiting...");
+                    running = false;
+                    break;
+
                 default:
                     System.out.println("Number is neither 1, 2, nor 3");
             }
@@ -58,38 +72,7 @@ public class Main {
 
     private static String generateSessionID() {
         return UUID.randomUUID().toString();
-    }
 
-    public static void UserInput() throws IOException {
-        boolean continueInput = true;
-        while (continueInput) {
-
-            System.out.print("Enter vehicle ID (or type 'quit' to exit): ");
-            String vehicleID = scanner.nextLine();
-
-            if ("quit".equalsIgnoreCase(vehicleID)) {
-                break; // Exit the loop if 'quit' is entered
-            }
-
-            System.out.print("Enter vehicle description: ");
-            String vehicleDescription = scanner.nextLine();
-
-            // Generate a unique session ID
-            String sessionID = generateSessionID();
-
-            // Create a new Tracker object
-            Tracker tracker = new Tracker(vehicleID, vehicleDescription, sessionID);
-
-            // Add the Tracker object to the HashMap
-            locationTracker.put(vehicleID, tracker);
-
-            // Prompt the user to enter another vehicle
-            System.out.print("Enter another vehicle? (yes/no): ");
-            String input = scanner.nextLine();
-            if (!input.equalsIgnoreCase("yes")) {
-                break; // Exit the loop if 'yes' is not entered
-            }
-        }
     }
 
 
@@ -104,6 +87,14 @@ public class Main {
             System.out.println("Current Timestamp: " + tracker.getCurrentTimestamp());
             System.out.println("Current Location: " + tracker.getCurrentLocation());
             System.out.println();
+        }
+    }
+    public static void removeVehicle(String vehicleID) {
+        if (locationTracker.containsKey(vehicleID)) {
+            locationTracker.remove(vehicleID);
+            System.out.println("Vehicle with ID '" + vehicleID + "' removed successfully.");
+        } else {
+            System.out.println("Vehicle with ID '" + vehicleID + "' not found.");
         }
     }
 }
