@@ -16,7 +16,6 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
     implementation group: 'org.json', name: 'json', version: '20210307'
 
-
 }
 
 test {

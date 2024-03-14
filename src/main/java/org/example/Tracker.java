@@ -17,6 +17,12 @@ public class Tracker {
     private final Timestamp currentTimestamp;
     private final String currentLocation;
 
+    Constants constants = new Constants();
+    String APIKEY = constants.getAPIKEY();
+
+
+
+
     public Tracker(String vehicleID, String vehicleDescription, String sessionID) throws IOException, JSONException {
         this.vehicleID = vehicleID;
         this.vehicleDescription = vehicleDescription;
@@ -27,7 +33,7 @@ public class Tracker {
         this.currentTimestamp = new Timestamp(currentTimeMillis);
 
         // Get the current location
-        String apiKey = "AIzaSyAccEoqUDctnCVx1l-iPX9y5MJik0WpTP4"; // Replace with your actual API key
+        String apiKey = APIKEY;
         String endpoint = "https://www.googleapis.com/geolocation/v1/geolocate?key=" + apiKey;
         URL url = new URL(endpoint);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();

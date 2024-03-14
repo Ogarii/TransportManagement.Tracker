@@ -77,8 +77,6 @@ public class Main {
 
         */
     }
-
-
     private static String generateSessionID() {
         return UUID.randomUUID().toString();
 
