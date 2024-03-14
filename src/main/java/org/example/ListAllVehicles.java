@@ -6,6 +6,8 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,23 +26,25 @@ public class ListAllVehicles extends JFrame {
         mainPanel.setLayout(new BorderLayout());
 
         // Table
-        String[] columnNames = {"Vehicle Name", "Vehicle Description"};
+        String[] columnNames = {"Vehicle Name", "Vehicle Description", "Location", "Time"};
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
         JTable vehicleTable = new JTable(tableModel);
 
-        //Set info from the hashmap to the form
+        // Set info from the hashmap to the form
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // Format for time
         for (Map.Entry<String, Tracker> entry : trackerMap.entrySet()) {
             String vehicleName = entry.getKey();
             String vehicleDescription = entry.getValue().getVehicleDescription();
-            String[] rowData = {vehicleName, vehicleDescription};
+            String location = entry.getValue().getCurrentLocation(); // Assuming Tracker has getLocation()
+            Date lastUpdateTime = entry.getValue().getCurrentTimestamp(); // Assuming Tracker has getLastUpdateTime()
+            String formattedTime = sdf.format(lastUpdateTime);
+            String[] rowData = {vehicleName, vehicleDescription, location, formattedTime};
             tableModel.addRow(rowData);
         }
-        // Sample data (replace with logic to fetch actual vehicle data)
-        String[] row1 = {"", ""};
-        String[] row2 = {"", ""};
-        tableModel.addRow(row1);
-        tableModel.addRow(row2);
 
+        // Sample data (replace with logic to fetch actual vehicle data)
+        String[] row1 = {"", "", "", ""};
+        tableModel.addRow(row1);
         JScrollPane scrollPane = new JScrollPane(vehicleTable);
         mainPanel.add(scrollPane, BorderLayout.CENTER);
 
