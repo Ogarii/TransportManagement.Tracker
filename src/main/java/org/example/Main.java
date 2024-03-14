@@ -6,15 +6,21 @@ import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.UUID;
+import org.example.transportTracker;
+import javax.swing.*;
 
 public class Main {
 
     public static HashMap<String, Tracker> locationTracker = new HashMap<>();
-    public static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) throws IOException {
 
-        boolean running = true;
+  public static void main(String[] args) throws IOException {
+      // Create a new instance of the TransportTracker class
+      transportTracker transportTracker = new transportTracker();
+      // Make the TransportTracker form visible
+      transportTracker.setVisible(true);
+
+       /* boolean running = true;
         while (running) {
 
 
@@ -68,7 +74,10 @@ public class Main {
                     System.out.println("Number is neither 1, 2, nor 3");
             }
         }
+
+        */
     }
+
 
     private static String generateSessionID() {
         return UUID.randomUUID().toString();
